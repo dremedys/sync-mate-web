@@ -71,7 +71,7 @@ export class AuthService {
 
   public createHttpClient(axiosConfig?: AxiosRequestConfig): AxiosInstance {
     const httpClient = axios.create(axiosConfig);
-    httpClient.interceptors.request.use(this.authTokenRequestInterceptor);
+    // httpClient.interceptors.request.use(this.authTokenRequestInterceptor);
     httpClient.interceptors.response.use((response: AxiosResponse) => response, this.refreshTokenErrorInterceptor);
     return httpClient;
   }
@@ -191,13 +191,13 @@ export class AuthService {
       }
       await this.tokenRefreshing;
       const idToken = this.getIdToken();
-      if (idToken) {
-        axiosError.config.headers = {
-          ...axiosError.config.headers,
-          Authorization: `Bearer ${idToken}`,
-        };
-      }
-      return axios.request(axiosError.config);
+      // if (idToken) {
+      //   axiosError.config.headers = {
+      //     ...axiosError.config.headers,
+      //     Authorization: `Bearer ${idToken}`,
+      //   };
+      // }
+      // return axios.request(axiosError.config);
     }
     throw axiosError;
   };
