@@ -1,0 +1,52 @@
+module.exports = {
+  root: true,
+  extends: [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "next",
+    "prettier",
+  ],
+  env: {
+    browser: true,
+    jasmine: true,
+    jest: true,
+  },
+  settings: {
+    react: {
+      pragma: "React",
+      version: "detect",
+    },
+  },
+  parser: "@typescript-eslint/parser",
+  plugins: [
+    "react",
+    "@typescript-eslint",
+    "prettier",
+    "react-hooks",
+    "unused-imports",
+  ],
+  rules: {
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports-ts": "warn",
+    "react/display-name": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    camelcase: "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/no-unused-vars": [1, { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/no-var-requires": 0,
+  },
+  globals: {
+    // process: false,
+    Promise: true,
+    module: true,
+  },
+};
