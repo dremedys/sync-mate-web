@@ -62,7 +62,7 @@ export const AboutPage = () => {
 };
 
 const Root = styled('div')`
-  margin: 64px 0;
+  margin: 64px auto;
 `;
 
 export default AboutPage;
