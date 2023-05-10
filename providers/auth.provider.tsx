@@ -61,9 +61,9 @@ export const AuthProvider: FC<Props> = ({ children }) => {
       router.push('/');
     };
     authService.loginStatus.on(AuthStatus.UNAUTHORIZED, handler);
-    return () => {
-      authService?.loginStatus?.off(AuthStatus.UNAUTHORIZED, handler);
-    };
+    // return () => {
+    //   authService?.loginStatus?.off(AuthStatus.UNAUTHORIZED, handler);
+    // };
   }, [router]);
 
   useEffect(() => {
