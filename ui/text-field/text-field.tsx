@@ -15,8 +15,8 @@ export const TextField: FC<Props> = forwardRef((props, ref) => {
 export const Label = styled(FormLabel)`
   display: block;
   font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.3;
+  font-size: 18px;
+  line-height: 24px;
   color: #6d6e85;
   margin-bottom: 4px;
 

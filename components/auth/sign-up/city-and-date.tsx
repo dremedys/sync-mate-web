@@ -1,3 +1,4 @@
+import { authService, useAuth } from '@/providers/auth.provider';
 import { UpdateProfileRequestDto } from '@/types/auth';
 import { Label, LoadingButton, TextField } from '@/ui';
 import { SelectField } from '@/ui/SelectField/SelectField';
@@ -7,13 +8,14 @@ import dayjs, { Dayjs } from 'dayjs';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
-type CityAndDateFormValues = Pick<UpdateProfileRequestDto, 'cityId' | 'birthDate' | 'countryId'>;
+type CityAndDateFormValues = Pick<UpdateProfileRequestDto, 'address' | 'date_of_birth'>;
 
 type Props = {
   onNextStep: () => void;
 };
 
 export const CityAndDate: FC<Props> = ({ onNextStep }) => {
+  const { profile } = useAuth();
   const {
     handleSubmit,
     register,
@@ -21,18 +23,22 @@ export const CityAndDate: FC<Props> = ({ onNextStep }) => {
     setValue,
   } = useForm<CityAndDateFormValues>();
 
-  const onSubmit = handleSubmit(values => {
-    console.log(values);
-    onNextStep();
+  const onSubmit = handleSubmit(async values => {
+    try {
+      await authService.updateProfile(values);
+      onNextStep();
+    } catch (err) {
+      console.log(err);
+    }
   });
 
   return (
     <Root onSubmit={onSubmit}>
       <FormControl fullWidth>
-        <Label hasError={!!errors.birthDate}>Birth date</Label>
+        <Label hasError={!!errors.date_of_birth}>Birth date</Label>
         <StyledDatePicker
           onChange={val => {
-            setValue('birthDate', dayjs(val as Dayjs).format('DD-MM-YYYY'));
+            setValue('date_of_birth', dayjs(val as Dayjs).format('YYYY-MM-DD'));
           }}
         />
       </FormControl>
@@ -47,7 +53,7 @@ export const CityAndDate: FC<Props> = ({ onNextStep }) => {
       {/*  />*/}
       {/*</FormControl>*/}
       <FormControl fullWidth>
-        <Label hasError={!!errors.cityId}>City</Label>
+        <Label hasError={!!errors.address?.city_id}>City</Label>
         <SelectField
           options={[
             { label: 'Aktau', value: 'dew' },
@@ -57,7 +63,7 @@ export const CityAndDate: FC<Props> = ({ onNextStep }) => {
             { label: 'Shymkent', value: 'wefef' },
           ]}
           onChange={val => {
-            setValue('cityId', val);
+            val && setValue('address.city_id', +val);
           }}
         />
       </FormControl>

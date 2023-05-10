@@ -11,8 +11,10 @@ export const Header = () => {
   const links = [
     { href: '/', title: 'Home' },
     { href: '/teams', title: 'Teams' },
-    { href: '/people', title: 'People' },
+    // { href: '/people', title: 'People' },
     { href: '/news', title: 'News' },
+    { href: '/our-team', title: 'Our team' },
+    { href: '/about', title: 'About project' },
   ];
 
   const handleCreateTeam = () => {
@@ -40,11 +42,11 @@ export const Header = () => {
           {/*  Create a team*/}
           {/*</Button>*/}
         </Left>
-        <Box>
+        <Box sx={{ marginBottom: '10px' }}>
           {authenticated ? (
             <ProfileMenu />
           ) : (
-            <Button variant="outlined" href="/auth/sign-in" sx={{ marginBottom: '10px' }}>
+            <Button variant="outlined" href="/auth/sign-in">
               Sign in
             </Button>
           )}
@@ -72,7 +74,7 @@ const ChildrenWrapper = styled('div')(({ theme }) => ({
 
 const Left = styled('div')(({ theme }) => ({
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-end',
 }));
 
 const Navigation = styled('nav')(({ theme }) => ({
@@ -81,7 +83,7 @@ const Navigation = styled('nav')(({ theme }) => ({
   columnGap: '25px',
 }));
 
-const NavItem = styled('a')(({ theme }) => ({
+const NavItem = styled('div')(({ theme }) => ({
   textDecoration: 'none',
   fontSize: '16px',
   fontWeight: 500,
@@ -89,6 +91,7 @@ const NavItem = styled('a')(({ theme }) => ({
   paddingBottom: '21px',
   '&.isActive': {
     borderBottom: '3px solid',
+    paddingBottom: '18px',
     borderColor: theme.palette.primary.main,
   },
 }));

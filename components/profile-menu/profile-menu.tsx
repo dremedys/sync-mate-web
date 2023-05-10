@@ -1,9 +1,11 @@
+import { useAuth } from '@/providers/auth.provider';
 import { Mail, Notifications } from '@mui/icons-material';
-import { Avatar, Box, Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
+import { Avatar, Box, IconButton, Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export const ProfileMenu = () => {
+  const { logout, profile } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -17,15 +19,23 @@ export const ProfileMenu = () => {
     setAnchorEl(null);
   };
 
+  const handleHref = (href: string) => {
+    return () => router.push(href);
+  };
+
   return (
     <>
       <Box display="flex" alignItems="center">
         <Box display="flex" alignItems="center" columnGap="20px" mr="40px" color="primary.main">
-          <Mail />
-          <Notifications />
+          <IconButton onClick={handleHref('/messages')}>
+            <Mail />
+          </IconButton>
+          <IconButton onClick={handleHref('/notifications')}>
+            <Notifications />
+          </IconButton>
         </Box>
         <ProfileLink onClick={handleMenu}>
-          <Username>Dariga</Username>
+          <Username>{profile?.full_name}</Username>
           <Avatar style={{ display: 'inline-flex', marginLeft: '8px', cursor: 'pointer' }} src="" />
         </ProfileLink>
       </Box>
@@ -66,7 +76,7 @@ export const ProfileMenu = () => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            router.push('/profile');
+            router.push('/my-teams');
           }}>
           My teams
         </MenuItem>
@@ -78,7 +88,7 @@ export const ProfileMenu = () => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            // onLogout();
+            logout();
             handleClose();
           }}>
           Log out

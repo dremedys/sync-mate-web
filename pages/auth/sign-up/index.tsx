@@ -21,8 +21,7 @@ export const SignUp = () => {
   }, [currentStep, router]);
 
   const handleNextStep = (step: SignUpStep) => {
-    console.log(signUpSteps.indexOf(step));
-    if (signUpSteps.indexOf(step) + 1 === signUpSteps.length - 1) {
+    if (signUpSteps.indexOf(step) + 1 === signUpSteps.length) {
       router.push('/teams');
       return;
     }
@@ -30,22 +29,22 @@ export const SignUp = () => {
   };
 
   const stepsAndTitleMapping: Record<SignUpStep, string> = {
-    create: 'Присоединитесь к нам!',
-    locationAndDate: 'Завершите свой профиль',
-    interests: 'Завершите свой профиль',
-    images: 'Завершите свой профиль',
+    create: 'Join us!',
+    locationAndDate: 'Complete your profile',
+    interests: 'Complete your profile',
+    images: 'Complete your profile',
   };
 
   const stepsAndSubtitleMapping: Record<SignUpStep, string> = {
-    create: 'Создайте свой профиль, чтобы быть в нашей команде',
-    locationAndDate: 'Добавьте о себе пару деталей, чтобы люди смогли найти вас',
-    interests: 'Выберите теги, чтобы вы смогли легко найти команду, а команда смогла найти вас',
-    images: 'Добавьте свою фотографию, чтобы другие смогли доверять вам',
+    create: 'Create your profile to be part of our team',
+    locationAndDate: 'Add a few details about yourself so people can find you',
+    interests: 'Select tags so you can easily find the team and the team can find you',
+    images: 'Add your photo so others can trust you',
   };
 
   const stepsLittleName: Record<SignUpStep, string> = {
     create: 'General Info',
-    locationAndDate: 'Personal',
+    locationAndDate: 'Personalization.',
     interests: 'Description',
     images: 'Images',
   };

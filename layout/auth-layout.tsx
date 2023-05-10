@@ -123,6 +123,7 @@ const Title = styled(Typography)(({ theme }) => ({
 
 const Subtitle = styled(Typography)(() => ({
   marginBottom: '50px',
+  color: '#A8A8A8',
 }));
 
 const FormWrapper = styled('div')(() => ({

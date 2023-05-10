@@ -1,28 +1,43 @@
-import { SignUpRequestDto } from '@/types/auth';
+import { authService, useAuth } from '@/providers/auth.provider';
+import { SignInRequestDto } from '@/types/auth';
 import { LoadingButton, TextField } from '@/ui';
 import { styled } from '@mui/material';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
 
-type Props = {
-  onNextStep: () => void;
+const fetchTokens = async (payload: SignInRequestDto) => {
+  const tokens = await authService.login(payload);
+  return { tokens };
 };
 
-export const SignIn: FC<Props> = ({ onNextStep }) => {
+export const SignIn: FC = () => {
+  const { login } = useAuth();
+  const router = useRouter();
+  const { returnUrl } = router.query;
+
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<SignUpRequestDto>();
+  } = useForm<SignInRequestDto>();
 
-  const onSubmit = handleSubmit(values => {
-    console.log(values);
-    onNextStep();
+  const { mutateAsync, isLoading, error } = useMutation(fetchTokens, {
+    onSuccess: ({ tokens }) => {
+      login(tokens, (returnUrl as string) || '/');
+    },
+    onError: error => {
+      console.log(error);
+    },
   });
 
   return (
-    <Root onSubmit={onSubmit}>
+    <Root
+      onSubmit={handleSubmit(values => {
+        mutateAsync(values);
+      })}>
       <StyledTextField
         {...register('username')}
         hasError={!!errors.username}
@@ -30,7 +45,6 @@ export const SignIn: FC<Props> = ({ onNextStep }) => {
         fullWidth
         label="Username"
       />
-      <StyledTextField {...register('name')} name="name" hasError={!!errors.name} fullWidth label="Your name" />
       <StyledTextField
         {...register('password')}
         hasError={!!errors.password}

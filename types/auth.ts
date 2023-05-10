@@ -1,9 +1,7 @@
 export interface AuthTokens {
-  access_token: string;
-  refresh_token: string;
-  id_token: string;
-  expires_in: number;
-  expire_date?: number;
+  access: string;
+  refresh: string;
+  expire_at?: string;
 }
 
 export type AuthSubjectValue = {
@@ -16,37 +14,38 @@ export interface SignInRequestDto {
   password: string;
 }
 
-export interface SignInResponseDto {
-  access_token: string;
-  refresh_token: string;
-}
-
 export interface GetTagResponseDto {
   id: string;
   name: string;
 }
 
 export interface GetProfileResponseDto {
-  firstName: string;
-  lastName: string;
-  tags: GetTagResponseDto[];
+  full_name: string;
 }
 
 export interface SignUpRequestDto {
   username: string;
+  email: string;
   password: string;
-  name: string;
+  full_name: string;
+  is_signed: boolean;
 }
 
 export interface SignUpResponseDto {
-  access_token: string;
-  refresh_token: string;
+  access: string;
+  refresh: string;
+}
+
+export interface Address {
+  city_id: number;
+  country_name: string;
 }
 
 export interface UpdateProfileRequestDto {
-  cityId?: string;
-  countryId?: string;
-  birthDate?: string;
-  tagIds?: Array<number>;
-  description?: string;
+  address?: Address;
+  date_of_birth?: string;
+  user_tag_ids?: Array<number>;
+  image_urls?: string[];
+  avatar?: string;
+  bio?: string;
 }

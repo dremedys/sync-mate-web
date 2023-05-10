@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { FC, createContext, useContext, useEffect, useState } from 'react';
 
 export const authService = AuthService.createInstance({
-  apiRoot: process.env.NEXT_PUBLIC_GRIFFON_API_URL as string,
+  apiRoot: process.env.NEXT_PUBLIC_API_URL as string,
 });
 
 export type AuthState = {
@@ -52,13 +52,17 @@ export const AuthProvider: FC<Props> = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    console.log(authenticated);
+  }, [authenticated]);
+
+  useEffect(() => {
     const handler = () => {
       authService.setLoggedInValue(null);
       router.push('/');
     };
     authService.loginStatus.on(AuthStatus.UNAUTHORIZED, handler);
     return () => {
-      authService.loginStatus.off(AuthStatus.UNAUTHORIZED, handler);
+      authService?.loginStatus?.off(AuthStatus.UNAUTHORIZED, handler);
     };
   }, [router]);
 
@@ -82,9 +86,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
   const login = async (tokens: AuthTokens | null, redirectUrl?: string | null, disableRedirect?: boolean) => {
     if (tokens) {
       authService.persistTokens(tokens);
-      const profile = await authService.getProfile();
-      authService.persistProfile(profile);
-      authService.setLoggedInValue({ profile, tokens });
+      authService.setLoggedInValue({ profile: {} as GetProfileResponseDto, tokens });
       if (!disableRedirect && redirectUrl !== undefined && redirectUrl !== null) {
         router.push(redirectUrl ?? '/');
       }
@@ -94,14 +96,13 @@ export const AuthProvider: FC<Props> = ({ children }) => {
   const logout = () => {
     authService.logout();
     authService.setLoggedInValue(null);
-    localStorage.removeItem('previewCourseId');
     router.push('/');
   };
 
   return (
     <AuthContext.Provider
       value={{
-        authenticated: !isLoading && authenticated,
+        authenticated: authenticated,
         profile,
         setProfile,
         logout,

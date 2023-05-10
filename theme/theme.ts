@@ -64,6 +64,42 @@ theme.components = {
       },
     },
   },
+  MuiOutlinedInput: {
+    styleOverrides: {
+      root: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: '12px',
+        '& fieldset': {
+          borderColor: '1px solid rgba(38, 40, 66, 0.12)',
+        },
+      },
+      notchedOutline: {
+        '.Mui-focused &': {
+          borderColor: '#497CF6 !important',
+        },
+      },
+      input: {
+        borderRadius: '12px',
+        padding: '20px 12px',
+        fontSize: '16px',
+        '&::placeholder': {
+          color: '#8B8C9E',
+          opacity: 1,
+        },
+        '&.Mui-disabled': {
+          background: '#F0F0F7',
+        },
+        '&.Mui-focused': {
+          borderColor: '#497CF6',
+        },
+      },
+      inputSizeSmall: {
+        height: '32px',
+        padding: '4px 12px',
+        minHeight: 'unset',
+      },
+    },
+  },
 };
 
 export default theme;

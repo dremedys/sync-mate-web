@@ -6,7 +6,6 @@ import {
   GetProfileResponseDto,
   SignInRequestDto,
   SignUpRequestDto,
-  SignUpResponseDto,
   UpdateProfileRequestDto,
 } from '@/types/auth';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
@@ -71,7 +70,7 @@ export class AuthService {
 
   public createHttpClient(axiosConfig?: AxiosRequestConfig): AxiosInstance {
     const httpClient = axios.create(axiosConfig);
-    // httpClient.interceptors.request.use(this.authTokenRequestInterceptor);
+    httpClient.interceptors.request.use(this.authTokenRequestInterceptor);
     httpClient.interceptors.response.use((response: AxiosResponse) => response, this.refreshTokenErrorInterceptor);
     return httpClient;
   }
@@ -87,7 +86,8 @@ export class AuthService {
     const tokens = this.getTokens();
     const now = new Date();
     // Token is expired
-    if (tokens && tokens.expire_date && tokens.expire_date - now.getTime() <= 0) {
+    const expire_date = new Date(tokens?.expire_at || 0);
+    if (tokens && expire_date && expire_date.getTime() - now.getTime() <= 0) {
       this.tokenRefreshing = new Promise(resolve => {
         this.refreshTokenAndProfile()
           .catch(() => {
@@ -102,7 +102,7 @@ export class AuthService {
       await this.tokenRefreshing;
     }
     // Add token to headers
-    const idToken = this.getIdToken();
+    const idToken = this.getAccessToken();
     if (idToken) {
       config.headers = {
         ...config.headers,
@@ -114,20 +114,6 @@ export class AuthService {
     return config;
   };
 
-  public getIdToken = (): string | null => {
-    let tokens: AuthTokens | null = null;
-    const storedTokens = window.localStorage.getItem(TOKEN_STORAGE_KEY);
-    if (!storedTokens) {
-      return null;
-    }
-    try {
-      tokens = JSON.parse(storedTokens);
-    } catch (e) {
-      console.error(e);
-    }
-    return tokens?.id_token ?? null;
-  };
-
   public getAccessToken = (): string | null => {
     let tokens: AuthTokens | null = null;
     try {
@@ -135,7 +121,7 @@ export class AuthService {
     } catch (e) {
       console.error(e);
     }
-    return tokens?.access_token ?? null;
+    return tokens?.access ?? null;
   };
 
   public persistProfile = (profile: GetProfileResponseDto) => {
@@ -143,12 +129,10 @@ export class AuthService {
   };
 
   public persistTokens = (tokens: AuthTokens) => {
-    const expire_date = new Date().getTime() + tokens.expires_in * 1000;
     localStorage.setItem(
       TOKEN_STORAGE_KEY,
       JSON.stringify({
         ...tokens,
-        expire_date,
       }),
     );
   };
@@ -190,14 +174,14 @@ export class AuthService {
         });
       }
       await this.tokenRefreshing;
-      const idToken = this.getIdToken();
-      // if (idToken) {
-      //   axiosError.config.headers = {
-      //     ...axiosError.config.headers,
-      //     Authorization: `Bearer ${idToken}`,
-      //   };
-      // }
-      // return axios.request(axiosError.config);
+      const idToken = this.getAccessToken();
+      if (idToken) {
+        axiosError.config.headers = {
+          ...axiosError?.config?.headers,
+          Authorization: `Bearer ${idToken}`,
+        };
+      }
+      return axios.request(axiosError?.config);
     }
     throw axiosError;
   };
@@ -213,31 +197,26 @@ export class AuthService {
   };
 
   public login = (body: SignInRequestDto) => {
-    return axios.post<AuthTokens>(`/api/login`, body).then(res => res.data);
+    return axios.post<AuthTokens>(`${this.config.apiRoot}/api/auth/sign-in/`, body).then(res => res.data);
   };
 
   public refreshToken = () => {
     const params = new URLSearchParams();
-    params.append('refresh_token', this.getTokens()?.refresh_token || '');
+    params.append('refresh_token', this.getTokens()?.refresh || '');
+    params.append('grant_type', 'refresh_token');
 
-    return axios.post<AuthTokens>(`/api/token`, params).then(res => res.data);
-  };
-
-  public checkIfUserExists = (username: string) => {
-    return axios.post<any>(`${this.config.apiRoot}/username/check`, {
-      username,
-    });
+    return axios.post<AuthTokens>(`${this.config.apiRoot}/api/auth/token/refresh/`, params).then(res => res.data);
   };
 
   public signUp = (body: SignUpRequestDto) => {
-    return axios.post<SignUpResponseDto>(`/api/oauth/signup`, body).then(res => res.data);
+    return axios.post(`${this.config.apiRoot}/api/auth/sign-up/`, body).then(res => res.data);
   };
 
   public getProfile = () => {
     return this.httpClient
-      .get<GetProfileResponseDto>(`${this.config.apiRoot}/profile`, {
+      .get<GetProfileResponseDto>(`${this.config.apiRoot}/api/profile/`, {
         headers: {
-          Authorization: `Bearer ${this.getIdToken()}`,
+          Authorization: `Bearer ${this.getAccessToken()}`,
         },
       })
       .then(res => res?.data);
@@ -245,9 +224,9 @@ export class AuthService {
 
   public updateProfile = (data: UpdateProfileRequestDto) => {
     return axios
-      .patch<GetProfileResponseDto>(`${this.config.apiRoot}/profile`, data, {
+      .patch<GetProfileResponseDto>(`${this.config.apiRoot}/api/profile/`, data, {
         headers: {
-          Authorization: `Bearer ${this.getIdToken()}`,
+          Authorization: `Bearer ${this.getAccessToken()}`,
         },
       })
       .then(res => res.data);
