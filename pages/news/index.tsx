@@ -20,7 +20,7 @@ export const NewsPage = () => {
 };
 
 const Root = styled('div')(() => ({
-  margin: '40px 0',
+  margin: '40px auto',
 }));
 
 const items = [
