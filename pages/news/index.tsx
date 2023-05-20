@@ -10,8 +10,8 @@ export const NewsPage = () => {
           News
         </Typography>
         <div>
-          {items.map(item => (
-            <FeedItem key={item.date} {...item} />
+          {items.map((item, idx) => (
+            <FeedItem key={idx} {...item} />
           ))}
         </div>
       </Root>

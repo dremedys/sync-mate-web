@@ -33,18 +33,6 @@ const config = {
 
 const ReactS3Client = new S3(config);
 
-// AWS.config.update({
-//   accessKeyId: 'AKIAU45ITH4JFJGOBUUP',
-//   secretAccessKey: '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',
-// });
-
-// const myBucket = new AWS.S3({
-//   params: { Bucket: S3_BUCKET },
-//   region: REGION,
-//   accessKeyId: 'AKIAU45ITH4JFJGOBUUP',
-//   secretAccessKey: '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',
-// });
-
 type Props = {
   onNextStep: () => void;
 };

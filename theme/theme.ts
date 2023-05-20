@@ -1,9 +1,78 @@
 import { createTheme } from '@mui/material';
+import * as React from 'react';
+
+declare module '@mui/material/styles/createTypography' {
+  interface FontStyle {
+    fontWeightSemiBold: React.CSSProperties['fontWeight'];
+  }
+}
+
+interface TypographyVariants {
+  displaySmall: React.CSSProperties;
+  displayMedium: React.CSSProperties;
+  displayLarge: React.CSSProperties;
+  headlineLarge: React.CSSProperties;
+  headlineMedium: React.CSSProperties;
+  headlineSmall: React.CSSProperties;
+  titleLarge: React.CSSProperties;
+  titleMedium: React.CSSProperties;
+  titleSmall: React.CSSProperties;
+  bodyLarge: React.CSSProperties;
+  bodyMedium: React.CSSProperties;
+  bodySmall: React.CSSProperties;
+  paragraphLarge: React.CSSProperties;
+  paragraphMedium: React.CSSProperties;
+  paragraphSmall: React.CSSProperties;
+  button: React.CSSProperties;
+  caption: React.CSSProperties;
+  underline: React.CSSProperties;
+}
+
+interface TypographyVariantsOptions {
+  displaySmall: React.CSSProperties;
+  displayMedium: React.CSSProperties;
+  displayLarge: React.CSSProperties;
+  headlineLarge: React.CSSProperties;
+  headlineMedium: React.CSSProperties;
+  headlineSmall: React.CSSProperties;
+  titleLarge: React.CSSProperties;
+  titleMedium: React.CSSProperties;
+  titleSmall: React.CSSProperties;
+  bodyLarge: React.CSSProperties;
+  bodyMedium: React.CSSProperties;
+  bodySmall: React.CSSProperties;
+  paragraphLarge: React.CSSProperties;
+  paragraphMedium: React.CSSProperties;
+  paragraphSmall: React.CSSProperties;
+  button: React.CSSProperties;
+  caption: React.CSSProperties;
+  underline: React.CSSProperties;
+}
+
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    displaySmall: true;
+    displayMedium: true;
+    displayLarge: true;
+    headlineLarge: true;
+    headlineMedium: true;
+    headlineSmall: true;
+    titleLarge: true;
+    titleMedium: true;
+    titleSmall: true;
+    bodyLarge: true;
+    bodyMedium: true;
+    bodySmall: true;
+    paragraphLarge: true;
+    paragraphMedium: true;
+    paragraphSmall: true;
+    button: true;
+    caption: true;
+    underline: true;
+  }
+}
 
 const theme = createTheme({
-  typography: {
-    fontFamily: 'Euclid, sans-serif',
-  },
   shape: {
     borderRadius: 12,
   },
@@ -26,6 +95,145 @@ const theme = createTheme({
     },
   },
 });
+
+theme.typography = {
+  ...theme.typography,
+  fontSize: 14,
+  fontWeightLight: 300,
+  fontWeightRegular: 400,
+  fontWeightMedium: 500,
+  fontWeightSemiBold: 600,
+  fontWeightBold: 700,
+  fontFamily: [
+    'Euclid',
+    'sans-serif',
+    'Roboto',
+    '"Helvetica Neue"',
+    'Arial',
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(','),
+};
+
+theme.typography = {
+  ...theme.typography,
+  headlineLarge: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '45px',
+    lineHeight: '50px',
+    display: 'block',
+  },
+  displayMedium: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '14px',
+    lineHeight: '18px',
+    display: 'block',
+  },
+  headlineMedium: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '14px',
+    lineHeight: '18px',
+    display: 'block',
+  },
+  displaySmall: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '12px',
+    lineHeight: '16px',
+    display: 'block',
+  },
+  headlineSmall: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '12px',
+    lineHeight: '16px',
+    display: 'block',
+  },
+  titleLarge: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightBold,
+    fontSize: '16px',
+    lineHeight: '20px',
+    display: 'block',
+  },
+  titleMedium: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightBold,
+    fontSize: '14px',
+    lineHeight: '18px',
+    display: 'block',
+  },
+  titleSmall: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightBold,
+    fontSize: '12px',
+    lineHeight: '16px',
+    display: 'block',
+  },
+  bodyLarge: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '16px',
+    lineHeight: '24px',
+    display: 'block',
+  },
+  bodyMedium: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '14px',
+    lineHeight: '20px',
+    display: 'block',
+  },
+  bodySmall: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '12px',
+    lineHeight: '16px',
+    display: 'block',
+  },
+  paragraphLarge: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '16px',
+    lineHeight: '24px',
+    display: 'block',
+  },
+  paragraphMedium: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '14px',
+    lineHeight: '20px',
+    display: 'block',
+  },
+  paragraphSmall: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '12px',
+    lineHeight: '16px',
+    display: 'block',
+  },
+  button: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightBold,
+    fontSize: '14px',
+    lineHeight: '18px',
+    display: 'inline-block',
+  },
+  caption: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '12px',
+    lineHeight: '16px',
+    display: 'block',
+  },
+  underline: {
+    textDecoration: 'underline',
+  },
+};
 
 theme.components = {
   MuiButton: {
