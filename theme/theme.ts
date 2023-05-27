@@ -116,7 +116,7 @@ theme.typography = {
   ].join(','),
 };
 
-theme.typography = {
+const typography = {
   ...theme.typography,
   headlineLarge: {
     fontFamily: theme.typography.fontFamily,
