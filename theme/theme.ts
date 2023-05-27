@@ -7,46 +7,48 @@ declare module '@mui/material/styles/createTypography' {
   }
 }
 
-interface TypographyVariants {
-  displaySmall: React.CSSProperties;
-  displayMedium: React.CSSProperties;
-  displayLarge: React.CSSProperties;
-  headlineLarge: React.CSSProperties;
-  headlineMedium: React.CSSProperties;
-  headlineSmall: React.CSSProperties;
-  titleLarge: React.CSSProperties;
-  titleMedium: React.CSSProperties;
-  titleSmall: React.CSSProperties;
-  bodyLarge: React.CSSProperties;
-  bodyMedium: React.CSSProperties;
-  bodySmall: React.CSSProperties;
-  paragraphLarge: React.CSSProperties;
-  paragraphMedium: React.CSSProperties;
-  paragraphSmall: React.CSSProperties;
-  button: React.CSSProperties;
-  caption: React.CSSProperties;
-  underline: React.CSSProperties;
-}
+declare module '@mui/material/styles' {
+  interface TypographyVariants {
+    displaySmall: React.CSSProperties;
+    displayMedium: React.CSSProperties;
+    displayLarge: React.CSSProperties;
+    headlineLarge: React.CSSProperties;
+    headlineMedium: React.CSSProperties;
+    headlineSmall: React.CSSProperties;
+    titleLarge: React.CSSProperties;
+    titleMedium: React.CSSProperties;
+    titleSmall: React.CSSProperties;
+    bodyLarge: React.CSSProperties;
+    bodyMedium: React.CSSProperties;
+    bodySmall: React.CSSProperties;
+    paragraphLarge: React.CSSProperties;
+    paragraphMedium: React.CSSProperties;
+    paragraphSmall: React.CSSProperties;
+    button: React.CSSProperties;
+    caption: React.CSSProperties;
+    underline: React.CSSProperties;
+  }
 
-interface TypographyVariantsOptions {
-  displaySmall: React.CSSProperties;
-  displayMedium: React.CSSProperties;
-  displayLarge: React.CSSProperties;
-  headlineLarge: React.CSSProperties;
-  headlineMedium: React.CSSProperties;
-  headlineSmall: React.CSSProperties;
-  titleLarge: React.CSSProperties;
-  titleMedium: React.CSSProperties;
-  titleSmall: React.CSSProperties;
-  bodyLarge: React.CSSProperties;
-  bodyMedium: React.CSSProperties;
-  bodySmall: React.CSSProperties;
-  paragraphLarge: React.CSSProperties;
-  paragraphMedium: React.CSSProperties;
-  paragraphSmall: React.CSSProperties;
-  button: React.CSSProperties;
-  caption: React.CSSProperties;
-  underline: React.CSSProperties;
+  interface TypographyVariantsOptions {
+    displaySmall: React.CSSProperties;
+    displayMedium: React.CSSProperties;
+    displayLarge: React.CSSProperties;
+    headlineLarge: React.CSSProperties;
+    headlineMedium: React.CSSProperties;
+    headlineSmall: React.CSSProperties;
+    titleLarge: React.CSSProperties;
+    titleMedium: React.CSSProperties;
+    titleSmall: React.CSSProperties;
+    bodyLarge: React.CSSProperties;
+    bodyMedium: React.CSSProperties;
+    bodySmall: React.CSSProperties;
+    paragraphLarge: React.CSSProperties;
+    paragraphMedium: React.CSSProperties;
+    paragraphSmall: React.CSSProperties;
+    button: React.CSSProperties;
+    caption: React.CSSProperties;
+    underline: React.CSSProperties;
+  }
 }
 
 declare module '@mui/material/Typography' {
@@ -116,7 +118,7 @@ theme.typography = {
   ].join(','),
 };
 
-const typography = {
+theme.typography = {
   ...theme.typography,
   headlineLarge: {
     fontFamily: theme.typography.fontFamily,
