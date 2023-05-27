@@ -273,6 +273,9 @@ theme.components = {
     },
   },
   MuiOutlinedInput: {
+    defaultProps: {
+      placeholder: 'Start typing..',
+    },
     styleOverrides: {
       root: {
         backgroundColor: '#FFFFFF',

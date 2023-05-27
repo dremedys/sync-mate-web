@@ -1,24 +1,26 @@
+import { GetTeamResponseDto } from '@/types/team';
 import { Tag } from '@/ui/tag/tag';
 import { Button, Typography, styled } from '@mui/material';
+import { FC } from 'react';
 
-export const TeamCard = () => {
+type Props = {
+  team: GetTeamResponseDto;
+};
+export const TeamCard: FC<Props> = ({ team }) => {
   return (
     <Root>
       <Top>
         <TopLeft>
-          <Name>Startup project team</Name>
-          <Description>
-            We are looking for inspired people for our AI application which helps people to find a team. If you know
-            about computer science and you have analytics, join our team
-          </Description>
+          <Name>{team.name}</Name>
+          <Description>{team.description}</Description>
         </TopLeft>
         <TopRight>
-          <img src="https://mpost.io/wp-content/uploads/image-74-7-1024x1024.jpg" alt="" />
+          <img src={team.avatar} alt="" />
         </TopRight>
       </Top>
       <Tags>
-        {tags.map(tag => (
-          <Tag key={tag}>{tag}</Tag>
+        {team.tags.map(tag => (
+          <Tag key={tag.id}>{tag.name_en}</Tag>
         ))}
       </Tags>
       <Bottom>

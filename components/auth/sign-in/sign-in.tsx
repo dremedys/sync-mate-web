@@ -59,7 +59,7 @@ export const SignIn: FC = () => {
           <a>Sign up</a>
         </LoginLink>
       </LoginBlock>
-      <LoadingButton fullWidth loading={false} variant="contained" type="submit">
+      <LoadingButton fullWidth loading={isLoading} variant="contained" type="submit">
         Login
       </LoadingButton>
     </Root>

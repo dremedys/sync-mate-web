@@ -10,8 +10,9 @@ export function Tag<T>({ onClick, onRemove, children }: TagProps<T>) {
           onClick={event => {
             onRemove(event);
           }}>
-          <span>×</span>
-          {/*<Close width="9px" height="9px" />*/}
+          <span style={{ fontWeight: 400, fontSize: '20px', lineHeight: '20px', transform: 'translateY(-1.5px)' }}>
+            ×
+          </span>
         </Remove>
       )}
     </Wrapper>
@@ -45,23 +46,16 @@ const Text = styled.div`
 `;
 
 const Remove = styled.span`
-  padding: 0;
   border-radius: 50%;
   transition: all 0.3s ease-out;
   border: 3px solid #1a6bde;
   color: #1a6bde;
   display: flex;
-  line-height: 0;
-  position: relative;
   align-items: center;
   justify-content: center;
-  box-sizing: content-box;
-  width: 17px;
-  height: 17px;
-  font-weight: 600;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
-  text-align: center;
-  font-size: 20px;
   &:hover {
     opacity: 0.7;
     cursor: pointer;

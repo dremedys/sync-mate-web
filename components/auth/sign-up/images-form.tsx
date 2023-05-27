@@ -38,6 +38,8 @@ type Props = {
 };
 
 export const ImagesForm: FC<Props> = ({ onNextStep }) => {
+  const [loading, setLoading] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const {
     handleSubmit,
@@ -49,7 +51,8 @@ export const ImagesForm: FC<Props> = ({ onNextStep }) => {
   const [selectedFile, setSelectedFile] = useState<any>(null);
 
   const onSubmit = handleSubmit(async values => {
-    console.log('we');
+    setLoading(true);
+
     try {
       // console.log(files[0].name);
       // const params = {
@@ -66,11 +69,12 @@ export const ImagesForm: FC<Props> = ({ onNextStep }) => {
       //   .then((data: any) => console.log(data))
       //   .catch((err: any) => console.error(err));
       const data = await authService.updateProfile(values);
-      authService.persistProfile(data);
       authService.setLoggedInValue({ profile: data, tokens: authService.getTokens() as AuthTokens });
       onNextStep();
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   });
 
@@ -96,7 +100,7 @@ export const ImagesForm: FC<Props> = ({ onNextStep }) => {
       {/*  labelIdle='Drag & Drop your images or <span class="filepond--label-action">Browse</span>'*/}
       {/*/>*/}
 
-      <LoadingButton onClick={onSubmit} fullWidth loading={false} variant="contained">
+      <LoadingButton onClick={onSubmit} fullWidth loading={loading} variant="contained">
         Complete registration
       </LoadingButton>
     </Root>

@@ -37,7 +37,7 @@ export const HeroSection = () => {
         {/*    <Container className="container">*/}
         {/*      <Content>*/}
         {/*        <Title variant="h3" color="black">*/}
-        {/*          Join your dream team*/}
+        {/*          Join your dream team.ts*/}
         {/*        </Title>*/}
         {/*        <Description>Search and suggest to be in your field</Description>*/}
         {/*      </Content>*/}

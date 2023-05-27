@@ -1,24 +1,34 @@
 import { TeamCard } from '@/components/team-card/team-card';
 import { MainLayout } from '@/layout/main-layout/main-layout';
+import { useAuth } from '@/providers/auth.provider';
+import { getTeams } from '@/services/team';
 import { Tag } from '@/ui/tag/tag';
 import { Box, styled } from '@mui/material';
+import { useQuery } from 'react-query';
 
 export const TeamsPage = () => {
+  const { profile } = useAuth();
+  const { data: teams } = useQuery(['teams'], async () => {
+    try {
+      const { data } = await getTeams({ page: 1, limit: 100 });
+      return data.results;
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
   return (
     <MainLayout>
       <Box className="container" mt="24px" mb="100px">
         <TagsWrapper>
-          {TAGS.map(tag => (
-            <Tag key={tag}>{tag}</Tag>
+          {profile?.tags.map(tag => (
+            <Tag key={tag.id}>{tag.name_en}</Tag>
           ))}
         </TagsWrapper>
         <Grid>
-          <TeamCard />
-          <TeamCard />
-          <TeamCard />
-          <TeamCard />
-          <TeamCard />
-          <TeamCard />
+          {teams?.map(team => (
+            <TeamCard key={team.id} team={team} />
+          ))}
         </Grid>
       </Box>
     </MainLayout>

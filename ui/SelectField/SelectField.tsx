@@ -54,7 +54,12 @@ export const SelectField: FC<Props> = ({
               defaultOptions={options}
               isLoading={isLoading}
               styles={hasError ? customStylesError : customStyles}
-              loadOptions={onLoadOptions}
+              loadOptions={(s, callback) => {
+                setTimeout(
+                  () => callback(options.filter(option => option.label.toLowerCase().includes(s.toLowerCase()))),
+                  200,
+                );
+              }}
               onChange={v => {
                 onChange(v?.value);
               }}
@@ -74,7 +79,12 @@ export const SelectField: FC<Props> = ({
               defaultOptions={options}
               value={value}
               styles={hasError ? customStylesError : customStyles}
-              loadOptions={onLoadOptions}
+              loadOptions={(s, callback) => {
+                setTimeout(
+                  () => callback(options.filter(option => option.label.toLowerCase().includes(s.toLowerCase()))),
+                  200,
+                );
+              }}
               components={{
                 DropdownIndicator: () => <ArrowDropDown />,
               }}

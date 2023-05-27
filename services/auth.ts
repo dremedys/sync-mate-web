@@ -86,7 +86,7 @@ export class AuthService {
     const tokens = this.getTokens();
     const now = new Date();
     // Token is expired
-    const expire_date = new Date(tokens?.expire_at || 0);
+    const expire_date = new Date('01-01-2100');
     if (tokens && expire_date && expire_date.getTime() - now.getTime() <= 0) {
       this.tokenRefreshing = new Promise(resolve => {
         this.refreshTokenAndProfile()
@@ -201,11 +201,9 @@ export class AuthService {
   };
 
   public refreshToken = () => {
-    const params = new URLSearchParams();
-    params.append('refresh_token', this.getTokens()?.refresh || '');
-    params.append('grant_type', 'refresh_token');
-
-    return axios.post<AuthTokens>(`${this.config.apiRoot}/api/auth/token/refresh/`, params).then(res => res.data);
+    return axios
+      .post<AuthTokens>(`${this.config.apiRoot}/api/auth/token/refresh/`, { refresh: this.getTokens()?.refresh })
+      .then(res => res.data);
   };
 
   public signUp = (body: SignUpRequestDto) => {
@@ -229,7 +227,10 @@ export class AuthService {
           Authorization: `Bearer ${this.getAccessToken()}`,
         },
       })
-      .then(res => res.data);
+      .then(res => {
+        this.persistProfile(res.data);
+        return res.data;
+      });
   };
 
   public logout = () => {

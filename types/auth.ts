@@ -1,3 +1,5 @@
+import { GetTagResponseDto } from '@/types/tag';
+
 export interface AuthTokens {
   access: string;
   refresh: string;
@@ -14,13 +16,14 @@ export interface SignInRequestDto {
   password: string;
 }
 
-export interface GetTagResponseDto {
-  id: string;
-  name: string;
-}
-
 export interface GetProfileResponseDto {
   full_name: string;
+  tags: GetTagResponseDto[];
+  username: string;
+  date_of_birth: string;
+  country_name: string;
+  city_name: string;
+  bio: string;
 }
 
 export interface SignUpRequestDto {
@@ -42,10 +45,12 @@ export interface Address {
 }
 
 export interface UpdateProfileRequestDto {
-  address?: Address;
+  city_name?: string;
+  country_name?: string;
   date_of_birth?: string;
-  user_tag_ids?: Array<number>;
+  tag_ids?: Array<number>;
   image_urls?: string[];
   avatar?: string;
   bio?: string;
+  username?: string;
 }

@@ -13,6 +13,8 @@ type Props = {
 };
 
 export const CreateAccountStep: FC<Props> = ({ onNextStep }) => {
+  const [loading, setLoading] = useState(false);
+
   const [isShown, setIsShown] = useState(false);
   const {
     handleSubmit,
@@ -26,12 +28,16 @@ export const CreateAccountStep: FC<Props> = ({ onNextStep }) => {
   const isAccepted = watch('is_signed');
 
   const onSubmit = handleSubmit(async values => {
+    setLoading(true);
+
     try {
       const res = await authService.signUp(values);
       authService.persistTokens({ access: res.access, refresh: res.refresh, expire_at: '34343434' });
       onNextStep();
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   });
 
@@ -100,7 +106,7 @@ export const CreateAccountStep: FC<Props> = ({ onNextStep }) => {
           <a>Sign in</a>
         </LoginLink>
       </LoginBlock>
-      <LoadingButton fullWidth loading={false} variant="contained" type="submit">
+      <LoadingButton fullWidth loading={loading} variant="contained" type="submit">
         Sign up
       </LoadingButton>
     </Root>

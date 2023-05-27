@@ -1,12 +1,12 @@
-import { TAGS } from '@/pages/teams';
 import { authService } from '@/providers/auth.provider';
+import { getTopTags } from '@/services/tag';
 import { UpdateProfileRequestDto } from '@/types/auth';
 import { Option } from '@/types/common';
 import { LoadingButton, TextField } from '@/ui';
 import { SelectField } from '@/ui/SelectField/SelectField';
 import { Tag } from '@/ui/tag/tag';
 import { styled } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 type Props = {
@@ -14,6 +14,8 @@ type Props = {
 };
 
 export const Interests: FC<Props> = ({ onNextStep }) => {
+  const [loading, setLoading] = useState(false);
+
   const {
     handleSubmit,
     watch,
@@ -22,18 +24,34 @@ export const Interests: FC<Props> = ({ onNextStep }) => {
     formState: { errors },
   } = useForm<UpdateProfileRequestDto>();
 
-  const [tags, setTags] = useState<Option<number>[]>(TAGS.map(item => ({ label: item, value: Math.random() })));
-  const tagsValue = watch('user_tag_ids');
+  const fetchTopTags = async () => {
+    try {
+      const { data } = await getTopTags({ limit: 50, page: 1 });
+      setTags(data.results.map(item => ({ label: item.name_en, value: item.id })));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const [tags, setTags] = useState<Option<number>[]>([]);
+  const tagsValue = watch('tag_ids');
   const notSelectedTags = tags.filter(t => !tagsValue?.includes(t.value));
 
   const onSubmit = handleSubmit(async values => {
+    setLoading(true);
     try {
       await authService.updateProfile(values);
       onNextStep();
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   });
+
+  useEffect(() => {
+    fetchTopTags();
+  }, []);
 
   return (
     <Root onSubmit={onSubmit}>
@@ -52,7 +70,7 @@ export const Interests: FC<Props> = ({ onNextStep }) => {
         label="Tags"
         options={notSelectedTags.map(t => ({ ...t, value: String(t.value) }))}
         onChange={val => {
-          if (val) setValue('user_tag_ids', [...(tagsValue || []), +val]);
+          if (val) setValue('tag_ids', [...(tagsValue || []), +val]);
         }}
       />
       <Tags>
@@ -60,8 +78,8 @@ export const Interests: FC<Props> = ({ onNextStep }) => {
           <Tag
             onRemove={() => {
               setValue(
-                'user_tag_ids',
-                tagsValue?.filter(a => a !== t),
+                'tag_ids',
+                tagsValue.filter(a => a !== t),
               );
             }}
             key={t}>
@@ -69,7 +87,7 @@ export const Interests: FC<Props> = ({ onNextStep }) => {
           </Tag>
         ))}
       </Tags>
-      <LoadingButton fullWidth loading={false} variant="contained" type="submit">
+      <LoadingButton fullWidth loading={loading} variant="contained" type="submit">
         Continue
       </LoadingButton>
     </Root>

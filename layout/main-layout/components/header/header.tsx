@@ -4,6 +4,7 @@ import { useAuth } from '@/providers/auth.provider';
 import { Box, Button, styled } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 export const Header = () => {
   const router = useRouter();
@@ -19,9 +20,9 @@ export const Header = () => {
 
   const handleCreateTeam = () => {
     if (!authenticated) {
-      return router.replace('/auth/login');
+      return router.replace('/auth/sign-up', { query: { returnUrl: '/my-teams' } });
     }
-    router.push('/teams/create');
+    router.push('/my-teams');
   };
 
   return (
@@ -38,9 +39,9 @@ export const Header = () => {
               </ActiveLink>
             ))}
           </Navigation>
-          {/*<Button variant="contained" sx={{ ml: '24px', pb: '10px' }}>*/}
-          {/*  Create a team*/}
-          {/*</Button>*/}
+          <Button onClick={handleCreateTeam} variant="contained" sx={{ ml: '24px', pb: '10px', alignSelf: 'center' }}>
+            Create a team
+          </Button>
         </Left>
         <Box sx={{ marginBottom: '10px' }}>
           {authenticated ? (

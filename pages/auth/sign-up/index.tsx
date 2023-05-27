@@ -36,9 +36,9 @@ export const SignUp = () => {
   };
 
   const stepsAndSubtitleMapping: Record<SignUpStep, string> = {
-    create: 'Create your profile to be part of our team',
+    create: 'Create your profile to be part of our team.ts',
     locationAndDate: 'Add a few details about yourself so people can find you',
-    interests: 'Select tags so you can easily find the team and the team can find you',
+    interests: 'Select tags so you can easily find the team.ts and the team.ts can find you',
     images: 'Add your photo so others can trust you',
   };
 
