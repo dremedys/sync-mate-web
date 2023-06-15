@@ -20,6 +20,8 @@ export const Chat: FC<Props> = ({ id, team }) => {
 
   const { handleSendMessage, messages, isMyMessage, setInputText, inputText } = useChat(id, scrollToBottom);
 
+  const noMessage = messages.length === 0;
+
   return (
     <Root>
       <Header>
@@ -46,20 +48,30 @@ export const Chat: FC<Props> = ({ id, team }) => {
         </IconButton>
       </Header>
       <Main>
-        {messages.map(message => {
-          const isMine = isMyMessage(message.id);
-          const formattedTime = format(new Date(message.created_at), 'HH:MM');
-          return (
-            <Box key={message.id} display="flex">
-              {!isMine && <SenderAvatar src={message.sender.avatar} />}
-              <ChatItem isMine={isMine}>
-                {!isMine && <Sender>{message.sender.display_name}</Sender>}
-                <Text>{message.text}</Text>
-                <Time isMine={isMine}>{formattedTime}</Time>
-              </ChatItem>
-            </Box>
-          );
-        })}
+        {noMessage ? (
+          <Box
+            sx={{ backgroundColor: '#D4E4FA', width: '50%', margin: 'auto' }}
+            borderRadius="12px"
+            padding="30px 18px"
+            color="#6B6B6B">
+            You have matched with a user! Start chatting to get to know each other better.
+          </Box>
+        ) : (
+          messages.map(message => {
+            const isMine = isMyMessage(message.sender.id);
+            const formattedTime = format(new Date(message.created_at), 'HH:MM');
+            return (
+              <Box key={message.id} display="flex">
+                {!isMine && <SenderAvatar src={message.sender.avatar} />}
+                <ChatItem isMine={isMine}>
+                  {!isMine && <Sender>{message.sender.display_name}</Sender>}
+                  <Text>{message.text}</Text>
+                  <Time isMine={isMine}>{formattedTime}</Time>
+                </ChatItem>
+              </Box>
+            );
+          })
+        )}
         <div ref={messagesEndRef} />
       </Main>
       <Bottom>

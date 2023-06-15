@@ -1,7 +1,7 @@
 import { GetChatTeamResponseDto } from '@/types/team';
 import { Tag } from '@/ui/tag/tag';
 import { InfoOutlined } from '@mui/icons-material';
-import { Avatar, Typography, styled } from '@mui/material';
+import { Avatar, Box, Typography, styled } from '@mui/material';
 import { FC } from 'react';
 
 type Props = {
@@ -28,6 +28,14 @@ export const TeamInfo: FC<Props> = ({ team }) => {
         ))}
       </Tags>
       <Property>Teammates</Property>
+      {team.members.map(m => (
+        <Box mb="20px" columnGap="10px" display="flex" alignItems="center" key={m.id}>
+          <Avatar src={m.avatar} />
+          <Typography color="#6B6B6B" variant="bodyLarge">
+            {m.full_name}
+          </Typography>
+        </Box>
+      ))}
     </Root>
   );
 };

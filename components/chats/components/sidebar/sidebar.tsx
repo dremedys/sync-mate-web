@@ -20,11 +20,19 @@ export const Sidebar: FC<Props> = ({ onSelectChat, activeChat, chats }) => {
       <Main>
         {chats?.map(chat => {
           const isActive = chat.id === activeChat?.id;
+          console.log(chat.id);
+          console.log(activeChat?.id);
           return (
             <PreviewItem onClick={() => onSelectChat(chat)} key={chat.id} style={isActive ? sx : {}}>
               <PreviewTitle>{chat.team.name}</PreviewTitle>
               <PreviewText>
-                {chat.last_message?.sender.display_name} : {chat?.last_message?.text}
+                {chat.last_message ? (
+                  <>
+                    {chat.last_message?.sender.display_name} : {chat?.last_message?.text}
+                  </>
+                ) : (
+                  <span>Team created!</span>
+                )}
               </PreviewText>
             </PreviewItem>
           );

@@ -41,6 +41,16 @@ export const useChat = (chatId = '', scroll: () => void) => {
     }
     try {
       sendMessage(chatId, inputText);
+      const ra = generateRandomMessage();
+      if (!profile) return;
+      setMessages(prev => [
+        ...prev,
+        {
+          ...ra,
+          sender: { avatar: profile?.avatar, id: profile.id, display_name: profile?.full_name },
+          text: inputText,
+        },
+      ]);
       setInputText(undefined);
     } catch (e) {
       console.log(e);

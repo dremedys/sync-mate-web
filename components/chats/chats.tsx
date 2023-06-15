@@ -22,7 +22,7 @@ export const Chats = () => {
 
   return (
     <Root className="container">
-      <Sidebar onSelectChat={setActiveChat} chats={chats} />
+      <Sidebar onSelectChat={setActiveChat} chats={chats} activeChat={activeChat} />
       <Chat id={activeChat?.id} team={activeChat?.team} />
       <TeamInfo team={activeChat?.team} />
     </Root>

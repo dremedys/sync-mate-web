@@ -43,6 +43,7 @@ export type GetMyTeamResponseDto = GetTeamResponseDto & {
     interaction: InteractionEnum;
     avatar: string;
   }[];
+  chats: string[];
 };
 
 export type GetTeamsResponseDto = PaginatedResponseDto<GetTeamResponseDto>;

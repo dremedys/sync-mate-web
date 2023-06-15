@@ -41,7 +41,7 @@ const darik =
   'https://media.licdn.com/dms/image/D4D03AQHDLXiyzu_4Cg/profile-displayphoto-shrink_400_400/0/1685433769858?e=1692230400&v=beta&t=NmPvHSBHYKNRhKkh9dF4SsrSp0qK1Nx2qqsmToWtfQw';
 
 const bina =
-  'https://media.licdn.com/dms/image/C4E03AQFNrdj3Ys67Sw/profile-displayphoto-shrink_400_400/0/1618488532790?e=1692230400&v=beta&t=7qNcCnSMtB8XOh3ZR8qYqp0Yh2947zku2AZaqlx8B0k';
+  'https://media.licdn.com/dms/imageGulbina Bolatbekkyzy/C4E03AQFNrdj3Ys67Sw/profile-displayphoto-shrink_400_400/0/1618488532790?e=1692230400&v=beta&t=7qNcCnSMtB8XOh3ZR8qYqp0Yh2947zku2AZaqlx8B0k';
 export const ImagesForm: FC<Props> = ({ onNextStep }) => {
   const [loading, setLoading] = useState(false);
 
