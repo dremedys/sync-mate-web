@@ -75,9 +75,8 @@ export const ImagesForm: FC<Props> = ({ onNextStep }) => {
       //   .catch((err: any) => console.error(err));
       const data = await authService.updateProfile({
         ...values,
-        avatar:
-          // 'https://media.licdn.com/dms/image/C4E03AQFNrdj3Ys67Sw/profile-displayphoto-shrink_400_400/0/1618488532790?e=1691020800&v=beta&t=W5iig33fUCmKy4amF9_5M9cfDBMfRVjiVJeIeOg2Zdw',
-          'https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000',
+        // avatar: bina,
+        // avatar: darik,
       });
       authService.setLoggedInValue({ profile: data, tokens: authService.getTokens() as AuthTokens });
       onNextStep();

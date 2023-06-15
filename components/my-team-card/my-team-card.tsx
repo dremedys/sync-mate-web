@@ -48,13 +48,13 @@ export const MyTeamCard: FC<Props> = ({ team }) => {
           Members
         </Typography>
         <Members>
-          <Person>
-            <Avatar src="https://media.licdn.com/dms/image/D4D03AQHDLXiyzu_4Cg/profile-displayphoto-shrink_800_800/0/1685433769858?e=1691020800&v=beta&t=VkHqwYECMG-1Y8_dlKUXQxTsiP8GxNx4kwDva_sODLA"></Avatar>
-            <Typography mb="5px" color="#6B6B6B">
-              Dariga Abdikarimova
-            </Typography>
-            <Typography color="#A8A8A8">Admin</Typography>
-          </Person>
+          {/*<Person>*/}
+          {/*  <Avatar src="https://media.licdn.com/dms/image/D4D03AQHDLXiyzu_4Cg/profile-displayphoto-shrink_800_800/0/1685433769858?e=1691020800&v=beta&t=VkHqwYECMG-1Y8_dlKUXQxTsiP8GxNx4kwDva_sODLA"></Avatar>*/}
+          {/*  <Typography mb="5px" color="#6B6B6B">*/}
+          {/*    Dariga Abdikarimova*/}
+          {/*  </Typography>*/}
+          {/*  <Typography color="#A8A8A8">Admin</Typography>*/}
+          {/*</Person>*/}
           {team.members.map(member => (
             <Person key={member.id}>
               <Avatar src={member.avatar}></Avatar>
