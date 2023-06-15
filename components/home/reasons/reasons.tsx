@@ -12,11 +12,8 @@ export const Reasons = () => {
           <IconWrapper>
             <ThumbUp />
           </IconWrapper>
-          <ItemTitle>Improve your team</ItemTitle>
-          <ItemText>
-            Наша платформа является универсальной и подходит для всех возрастных категорий и полов. Мы уверены, что
-            каждый человек должен следить за своим здоровьем и делать все возможное для его укрепления.
-          </ItemText>
+          <ItemTitle>Join a team</ItemTitle>
+          <ItemText>Do what you love, meet others who love it, find your community. The rest is history!</ItemText>
         </Item>
         <Item>
           <IconWrapper>
@@ -24,19 +21,16 @@ export const Reasons = () => {
           </IconWrapper>
           <ItemTitle>Find the best match</ItemTitle>
           <ItemText>
-            Кроме того, мы предлагаем простой и удобный интерфейс, который позволяет быстро найти необходимую информацию
-            и выбрать подходящие витамины.
+            Events are happening on just about any topic you can think of, from online gaming and photography to yoga
+            and hiking.
           </ItemText>
         </Item>
         <Item>
           <IconWrapper>
             <HowToReg />
           </IconWrapper>
-          <ItemTitle>Meets and chat</ItemTitle>
-          <ItemText>
-            Выбрав нашу платформу, вы получите надежного партнера в борьбе за свое здоровье и благополучие. Мы
-            гарантируем высокое качество сервиса и индивидуальный подход к каждому клиенту.
-          </ItemText>
+          <ItemTitle>Start a team</ItemTitle>
+          <ItemText>You don’t have to be an expert to gather people together and explore shared interests.</ItemText>
         </Item>
       </Grid>
     </Root>

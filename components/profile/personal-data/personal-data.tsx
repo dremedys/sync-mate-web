@@ -1,3 +1,4 @@
+import { toast } from '@/components/toast/toast';
 import { authService, useAuth } from '@/providers/auth.provider';
 import { getCities, getCountries } from '@/services/geoname';
 import { UpdateProfileRequestDto } from '@/types/auth';
@@ -62,6 +63,7 @@ export const PersonalData = () => {
       await authService.updateProfile({
         ...values,
       });
+      toast.success('Changes are successfully saved!');
     } catch (err) {
       console.log(err);
     } finally {
@@ -166,6 +168,7 @@ const Label = styled(Typography)(() => ({
   color: '#6B6B6B',
 }));
 
-const Title = styled(Typography)(() => ({
+const Title = styled(Typography)(({ theme }) => ({
+  ...theme.typography.headlineSmall,
   marginBottom: '20px',
 }));

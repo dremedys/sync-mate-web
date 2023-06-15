@@ -1,21 +1,20 @@
 import { FeedItem } from '@/components/feed-item/feed-item';
 import { MainLayout } from '@/layout/main-layout/main-layout';
+import { NextPageWithLayout } from '@/pages/_app';
 import { Typography, styled } from '@mui/material';
 
-export const NewsPage = () => {
+export const NewsPage: NextPageWithLayout = () => {
   return (
-    <MainLayout>
-      <Root className="container">
-        <Typography variant="h3" mb="36px">
-          News
-        </Typography>
-        <div>
-          {items.map((item, idx) => (
-            <FeedItem key={idx} {...item} />
-          ))}
-        </div>
-      </Root>
-    </MainLayout>
+    <Root className="container">
+      <Typography variant="h3" mb="36px">
+        News
+      </Typography>
+      <div>
+        {items.map((item, idx) => (
+          <FeedItem key={idx} {...item} />
+        ))}
+      </div>
+    </Root>
   );
 };
 
@@ -59,4 +58,6 @@ Our team members are inspired by a passion for innovation, technology and creati
     height: 1280,
   },
 ];
+
+NewsPage.getLayout = page => <MainLayout>{page}</MainLayout>;
 export default NewsPage;

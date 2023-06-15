@@ -94,7 +94,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
   const logout = () => {
     authService.logout();
     authService.setLoggedInValue(null);
-    router.push('/news');
+    router.push('/auth/sign-in');
   };
 
   return (

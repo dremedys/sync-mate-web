@@ -90,7 +90,7 @@ const theme = createTheme({
       main: '#D6331F',
     },
     success: {
-      main: '#2DB77B',
+      main: '#7FFF00',
     },
     warning: {
       main: '#FFA530',
@@ -120,6 +120,13 @@ theme.typography = {
 
 theme.typography = {
   ...theme.typography,
+  displayLarge: {
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightSemiBold,
+    fontSize: '56px',
+    lineHeight: '64px',
+    display: 'block',
+  },
   headlineLarge: {
     fontFamily: theme.typography.fontFamily,
     fontWeight: theme.typography.fontWeightSemiBold,
@@ -222,7 +229,7 @@ theme.typography = {
     fontFamily: theme.typography.fontFamily,
     fontWeight: theme.typography.fontWeightMedium,
     fontSize: '14px',
-    lineHeight: '18px',
+    lineHeight: '20px',
     display: 'inline-block',
   },
   caption: {
@@ -233,11 +240,42 @@ theme.typography = {
     display: 'block',
   },
   underline: {
-    textDecoration: 'underline',
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: '10px',
+    lineHeight: '14px',
+    display: 'block',
   },
 };
 
 theme.components = {
+  MuiAlert: {
+    styleOverrides: {
+      root: {
+        padding: '19px 16px',
+        borderRadius: '12px',
+        fontSize: '14px',
+        fontWeight: theme.typography.fontWeightMedium,
+        boxShadow: '0px 16px 32px rgba(0, 0, 0, 0.04)',
+      },
+      standardSuccess: {
+        background: 'green',
+        color: '#FFFFFF',
+      },
+      standardWarning: {
+        background: '#FFA530',
+        color: '#262842',
+      },
+      standardInfo: {
+        background: '#497CF6',
+        color: '#FFFFFF',
+      },
+      standardError: {
+        background: '#D6331F',
+        color: '#FFFFFF',
+      },
+    },
+  },
   MuiButton: {
     styleOverrides: {
       root: {

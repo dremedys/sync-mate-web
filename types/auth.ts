@@ -1,3 +1,4 @@
+import { GetCertificateDto, GetEducationResponseDto, GetWorkDto } from '@/types/profile';
 import { GetTagResponseDto } from '@/types/tag';
 
 export interface AuthTokens {
@@ -24,6 +25,11 @@ export interface GetProfileResponseDto {
   country_name: string;
   city_name: string;
   bio: string;
+  avatar: string;
+  education_history: GetEducationResponseDto[];
+  licences: GetCertificateDto[];
+  work_experience_history: GetWorkDto[];
+  id: string;
 }
 
 export interface SignUpRequestDto {

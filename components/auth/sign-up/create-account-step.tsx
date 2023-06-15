@@ -49,6 +49,7 @@ export const CreateAccountStep: FC<Props> = ({ onNextStep }) => {
         fullWidth
         name="username"
         label="Username"
+        autoComplete="off"
       />
       <StyledTextField {...register('email')} hasError={!!errors.email} name="email" fullWidth label="Email" />
       <StyledTextField

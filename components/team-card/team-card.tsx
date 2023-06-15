@@ -5,8 +5,10 @@ import { FC } from 'react';
 
 type Props = {
   team: GetTeamResponseDto;
+  onLike: (id: number) => void;
+  onDislike: (id: number) => void;
 };
-export const TeamCard: FC<Props> = ({ team }) => {
+export const TeamCard: FC<Props> = ({ team, onLike, onDislike }) => {
   return (
     <Root>
       <Top>
@@ -24,8 +26,12 @@ export const TeamCard: FC<Props> = ({ team }) => {
         ))}
       </Tags>
       <Bottom>
-        <Button variant="outlined">Hide</Button>
-        <Button variant="contained">Apply</Button>
+        <Button variant="outlined" onClick={() => onDislike(team.id)}>
+          Hide
+        </Button>
+        <Button variant="contained" onClick={() => onLike(team.id)}>
+          Apply
+        </Button>
       </Bottom>
     </Root>
   );
@@ -49,12 +55,14 @@ const Top = styled('div')(({ theme }) => ({
 }));
 
 const Name = styled(Typography)(({ theme }) => ({
+  ...theme.typography.headlineLarge,
   fontSize: '20px',
   fontWeight: '500',
   marginBottom: '10px',
 }));
 
 const Description = styled(Typography)(({ theme }) => ({
+  ...theme.typography.bodyLarge,
   fontSize: '14px',
   color: '#6B6B6B',
 }));

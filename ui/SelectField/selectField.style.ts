@@ -4,6 +4,7 @@ export const customStyles: any = {
     borderRadius: '12px',
     background: 'transparent',
     border: '1px solid rgba(0, 0, 0, 0.12)',
+    minWidth: '200px',
   }),
   control: (base: any) => {
     return {
@@ -23,7 +24,7 @@ export const customStyles: any = {
   placeholder: (base: any) => ({
     ...base,
     fontWeight: 'normal',
-    fontSize: '14px',
+    fontSize: '16px',
     color: '#8B8C9E',
   }),
   valueContainer: (base: any) => ({

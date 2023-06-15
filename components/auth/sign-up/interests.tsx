@@ -1,5 +1,5 @@
 import { authService } from '@/providers/auth.provider';
-import { getTopTags } from '@/services/tag';
+import { getTags } from '@/services/tag';
 import { UpdateProfileRequestDto } from '@/types/auth';
 import { Option } from '@/types/common';
 import { LoadingButton, TextField } from '@/ui';
@@ -26,8 +26,8 @@ export const Interests: FC<Props> = ({ onNextStep }) => {
 
   const fetchTopTags = async () => {
     try {
-      const { data } = await getTopTags({ limit: 50, page: 1 });
-      setTags(data.results.map(item => ({ label: item.name_en, value: item.id })));
+      const { data } = await getTags();
+      setTags(data.map(item => ({ label: item.name_en, value: item.id })));
     } catch (e) {
       console.log(e);
     }

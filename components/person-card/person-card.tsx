@@ -1,18 +1,21 @@
+import { GetPersonFromListDto } from '@/types/people';
 import { Tag } from '@/ui/tag/tag';
 import { MoreVert } from '@mui/icons-material';
 import { Avatar, Button, IconButton, Typography, styled } from '@mui/material';
+import { FC } from 'react';
 
-export const PersonCard = () => {
+type Props = {
+  person: GetPersonFromListDto;
+  onLike: (id: number) => void;
+  onDislike: (id: number) => void;
+};
+export const PersonCard: FC<Props> = ({ onLike, onDislike, person: { full_name, bio, tags, id, avatar } }) => {
   return (
     <Root>
       <Top>
         <TopLeft>
-          <Avatar
-            sx={{ width: '100px', height: '100px' }}
-            src="https://mpost.io/wp-content/uploads/image-74-7-1024x1024.jpg"
-            alt="Person avatar"
-          />
-          <Name>David King</Name>
+          <Avatar sx={{ width: '100px', height: '100px' }} src={avatar} alt="Person avatar" />
+          <Name>{full_name}</Name>
         </TopLeft>
         <TopRight>
           <IconButton onClick={() => {}}>
@@ -21,19 +24,20 @@ export const PersonCard = () => {
         </TopRight>
       </Top>
       <About>
-        <Typography>
-          Creative and impressive React developer to make your websites a masterpiece. I know little about backend,
-          devops, DB, etc. I studied in KBTU so I am very clever.
-        </Typography>
+        <Typography variant="bodyLarge">{bio}</Typography>
       </About>
       <Tags>
         {tags.map(tag => (
-          <Tag key={tag}>{tag}</Tag>
+          <Tag key={tag.id}>{tag.name_en}</Tag>
         ))}
       </Tags>
       <Bottom>
-        <Button variant="outlined">Hide</Button>
-        <Button variant="contained">Apply</Button>
+        <Button onClick={() => onDislike(id)} variant="outlined">
+          Hide
+        </Button>
+        <Button onClick={() => onLike(id)} variant="contained">
+          Like
+        </Button>
       </Bottom>
     </Root>
   );
@@ -55,6 +59,7 @@ const Top = styled('div')(({ theme }) => ({
 }));
 
 const Name = styled(Typography)(({ theme }) => ({
+  ...theme.typography.headlineLarge,
   fontSize: '20px',
   fontWeight: '500',
 }));

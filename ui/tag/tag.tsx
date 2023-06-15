@@ -43,6 +43,11 @@ const Text = styled.div`
   text-align: center;
   color: #1a6bde;
   white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
 `;
 
 const Remove = styled.span`

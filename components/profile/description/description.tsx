@@ -5,19 +5,23 @@ import { TextField, Typography, styled } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 export const Description = () => {
-  const { profile } = useAuth();
+  const { profile, setProfile } = useAuth();
   const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState<string | undefined>();
 
   useEffect(() => {
     setDescription(profile?.bio);
   }, [profile]);
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setLoading(true);
-    authService.updateProfile({ bio: description }).then(() => {
+    await authService.updateProfile({ bio: description }).then(() => {
       setLoading(false);
     });
+    const data = await authService.getProfile();
+    setProfile(data);
+    authService.persistProfile(data);
   };
+
   return (
     <CardItem>
       <Title>Description</Title>
@@ -40,8 +44,9 @@ export const Description = () => {
   );
 };
 
-const Title = styled(Typography)(() => ({
+const Title = styled(Typography)(({ theme }) => ({
   marginBottom: '20px',
+  ...theme.typography.headlineSmall,
 }));
 
 const StyledTextField = styled(TextField)(() => ({

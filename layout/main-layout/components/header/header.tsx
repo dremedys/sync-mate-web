@@ -10,11 +10,11 @@ export const Header = () => {
   const router = useRouter();
   const { authenticated, isLoading: isAuthLoading } = useAuth();
   const links = [
-    { href: '/', title: 'Home' },
+    // { href: '/', title: 'Home' },
     { href: '/teams', title: 'Teams' },
     { href: '/people', title: 'People' },
-    { href: '/news', title: 'News' },
-    { href: '/our-team', title: 'Our team' },
+    { href: '/news', title: 'Blog' },
+    // { href: '/our-team', title: 'Our team' },
     { href: '/about', title: 'About project' },
   ];
 
@@ -47,9 +47,14 @@ export const Header = () => {
           {authenticated ? (
             <ProfileMenu />
           ) : (
-            <Button variant="outlined" href="/auth/sign-in">
-              Sign in
-            </Button>
+            <>
+              <Button sx={{ marginRight: '10px' }} variant="outlined" href="/auth/sign-in">
+                Login
+              </Button>
+              <Button variant="outlined" href="/auth/sign-up">
+                Register
+              </Button>
+            </>
           )}
         </Box>
       </Root>

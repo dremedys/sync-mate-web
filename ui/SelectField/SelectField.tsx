@@ -80,6 +80,10 @@ export const SelectField: FC<Props> = ({
               value={value}
               styles={hasError ? customStylesError : customStyles}
               loadOptions={(s, callback) => {
+                if (onLoadOptions) {
+                  onLoadOptions(s);
+                  return;
+                }
                 setTimeout(
                   () => callback(options.filter(option => option.label.toLowerCase().includes(s.toLowerCase()))),
                   200,

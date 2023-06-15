@@ -217,7 +217,10 @@ export class AuthService {
           Authorization: `Bearer ${this.getAccessToken()}`,
         },
       })
-      .then(res => res?.data);
+      .then(res => {
+        this.persistProfile(res.data);
+        return res?.data;
+      });
   };
 
   public updateProfile = (data: UpdateProfileRequestDto) => {

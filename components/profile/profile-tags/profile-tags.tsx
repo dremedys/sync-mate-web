@@ -25,8 +25,8 @@ export const ProfileTags = () => {
   }, [profile]);
 
   const fetchTags = async () => {
-    const { data } = await getTags({ page: 1, limit: 100 });
-    setTags(data.results.map(item => ({ label: item.name_en, value: item.id })));
+    const { data } = await getTags();
+    setTags(data.map(item => ({ label: item.name_en, value: item.id })));
   };
 
   const [tags, setTags] = useState<Option<number>[]>([]);
@@ -80,8 +80,9 @@ export const ProfileTags = () => {
   );
 };
 
-const Title = styled(Typography)(() => ({
+const Title = styled(Typography)(({ theme }) => ({
   marginBottom: '20px',
+  ...theme.typography.headlineSmall,
 }));
 
 const Tags = styled('div')(() => ({

@@ -1,50 +1,49 @@
 import { MainLayout } from '@/layout/main-layout/main-layout';
+import { NextPageWithLayout } from '@/pages/_app';
 import { Avatar, Card, Typography, styled } from '@mui/material';
 
-export const OurTeam = () => {
+export const OurTeam: NextPageWithLayout = () => {
   return (
-    <MainLayout>
-      <Root className="container">
-        <Typography variant="h3" mb="32px">
-          Our team
-        </Typography>
-        <Grid>
-          <Item>
-            <MemberPhoto src="/images/darik.png" />
-            <Name>Dariga Abdikarimova, CEO</Name>
-            <MemberText>Middle Software Engineer at DAR, KBTU IS 4 year</MemberText>
-          </Item>
-          <Item>
-            <MemberPhoto src="/images/aigul.png" />
-            <Name>Aigul Amangaliyeva, UI/UX designer</Name>
-            <MemberText>
-              Intern of Department of Automation at TCO(Tengiz) <br />
-              Intern of Department of Automation at KazTransOil <br />
-              An entrepreneur engineer creating first startup has high technical competence and innovative thinking, is
-              ready to take risks and confidently go towards his goal of creating an innovative product.
-            </MemberText>
-          </Item>
-          <Item>
-            <MemberPhoto src="/images/bina.jpg" />
-            <Name>Gulbina Bolatbekkyzy, Software Engineer</Name>
-            <MemberText>
-              Backend developer at OneDev. A person who just loves life and wants to get the most out of it. Likes to
-              write thoughts and feelings. It seems she has not bad analytical skills.
-            </MemberText>
-          </Item>
-          <Item>
-            <MemberPhoto src="/images/danel.png" />
-            <Name>Omirkhanova Danel, Marketing</Name>
-            <MemberText>
-              Intern of Department of Automation at Schneider Electric. <br />
-              Intern of Department of Automation at CCI (Coca-Cola Almaty Bottlers). <br />A technically skilled and
-              innovative entrepreneur, embarking on their first startup, has the willingness to take risks and the
-              determination to achieve their goal of bringing a new and innovative product to the market.
-            </MemberText>
-          </Item>
-        </Grid>
-      </Root>
-    </MainLayout>
+    <Root className="container">
+      <Typography variant="h3" mb="32px">
+        Our team
+      </Typography>
+      <Grid>
+        <Item>
+          <MemberPhoto src="/images/darik.png" />
+          <Name>Dariga Abdikarimova, CEO</Name>
+          <MemberText>Middle Software Engineer at DAR, KBTU IS 4 year</MemberText>
+        </Item>
+        <Item>
+          <MemberPhoto src="/images/aigul.png" />
+          <Name>Aigul Amangaliyeva, UI/UX designer</Name>
+          <MemberText>
+            Intern of Department of Automation at TCO(Tengiz) <br />
+            Intern of Department of Automation at KazTransOil <br />
+            An entrepreneur engineer creating first startup has high technical competence and innovative thinking, is
+            ready to take risks and confidently go towards his goal of creating an innovative product.
+          </MemberText>
+        </Item>
+        <Item>
+          <MemberPhoto src="/images/bina.jpg" />
+          <Name>Gulbina Bolatbekkyzy, Software Engineer</Name>
+          <MemberText>
+            Backend developer at OneDev. A person who just loves life and wants to get the most out of it. Likes to
+            write thoughts and feelings. It seems she has not bad analytical skills.
+          </MemberText>
+        </Item>
+        <Item>
+          <MemberPhoto src="/images/danel.png" />
+          <Name>Omirkhanova Danel, Marketing</Name>
+          <MemberText>
+            Intern of Department of Automation at Schneider Electric. <br />
+            Intern of Department of Automation at CCI (Coca-Cola Almaty Bottlers). <br />A technically skilled and
+            innovative entrepreneur, embarking on their first startup, has the willingness to take risks and the
+            determination to achieve their goal of bringing a new and innovative product to the market.
+          </MemberText>
+        </Item>
+      </Grid>
+    </Root>
   );
 };
 
@@ -93,5 +92,7 @@ const MemberPhoto = styled(Avatar)(({ theme }) => ({
   height: '200px',
   marginBottom: '20px',
 }));
+
+OurTeam.getLayout = page => <MainLayout>{page}</MainLayout>;
 
 export default OurTeam;

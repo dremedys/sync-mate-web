@@ -17,16 +17,18 @@ export const HeroSection = () => {
           <FirstBannerWrapper>
             <Container className="container">
               <Content>
-                <Title variant="h3">Create and inspire</Title>
-                <Description>Build teams, expand your network: your solution for growth and development!</Description>
+                <Title variant="h3">Sync and make it happen!</Title>
+                <Description>
+                  Build a team, expand your network: your solution for joint growth and development!
+                </Description>
               </Content>
               <ImageWrapper>
                 <Image
-                  src="/images/home-banner-1.png"
-                  width={400}
-                  height={420}
+                  style={{ borderRadius: '8px' }}
+                  src="/images/sync-mates.avif"
+                  width={2000}
+                  height={1000}
                   layout="responsive"
-                  objectFit="contain"
                 />
               </ImageWrapper>
             </Container>
@@ -93,8 +95,8 @@ export const Content = styled('div')`
 `;
 
 export const ImageWrapper = styled('div')`
-  width: 506px;
-  height: 100%;
+  width: 45%;
+  overflow: hidden;
   ${props => props.theme.breakpoints.down('md')} {
     width: 100%;
   }

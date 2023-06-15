@@ -36,7 +36,7 @@ export const ProfileMenu = () => {
         </Box>
         <ProfileLink onClick={handleMenu}>
           <Username>{profile?.full_name}</Username>
-          <Avatar style={{ display: 'inline-flex', marginLeft: '8px', cursor: 'pointer' }} src="" />
+          <Avatar style={{ display: 'inline-flex', marginLeft: '8px', cursor: 'pointer' }} src={profile?.avatar} />
         </ProfileLink>
       </Box>
 
